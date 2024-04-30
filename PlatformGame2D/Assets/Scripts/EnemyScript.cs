@@ -11,6 +11,8 @@ public class EnemyScript : MonoBehaviour
     //лучи для детекта обрива(налаштування)
     [SerializeField] private float DownRightDetectionRay = 0;
     [SerializeField] private float DownLeftDetectionRay = 0;
+    [SerializeField] private float DownRightDetectionRayPos = 1;
+    [SerializeField] private float DownLeftDetectionRayPos = 1;
     private RaycastHit2D DownrightHit;
     private RaycastHit2D DownleftHit;
 
@@ -23,6 +25,7 @@ public class EnemyScript : MonoBehaviour
     private RaycastHit2D LeftHit;
 
     [SerializeField] private bool Move = true;
+    [SerializeField] private bool Inveres = false;
 
     private int walkVector;
     private Rigidbody2D rb;
@@ -33,6 +36,8 @@ public class EnemyScript : MonoBehaviour
         walkVector = (randomNumber == 0) ? -1 : 1;
 
         rb = GetComponent<Rigidbody2D>();
+
+        gameObject.tag = "Enemy";
     }
 
     void Update()
@@ -46,27 +51,45 @@ public class EnemyScript : MonoBehaviour
 
     void WalkControl()
     {
-        DownrightHit = Physics2D.Raycast(transform.position + new Vector3(DownRightDetectionRay, 0, 0), Vector2.down, 0.8f);
-        DownleftHit = Physics2D.Raycast(transform.position + new Vector3(DownLeftDetectionRay, 0, 0), Vector2.down, 0.8f);
+        DownrightHit = Physics2D.Raycast(transform.position + new Vector3(DownRightDetectionRay, 0, 0), Vector2.down, DownRightDetectionRayPos);
+        DownleftHit = Physics2D.Raycast(transform.position + new Vector3(DownLeftDetectionRay, 0, 0), Vector2.down, DownLeftDetectionRayPos);
 
         if (DownrightHit.collider != null)
         {
-            Debug.DrawRay(transform.position + new Vector3(DownRightDetectionRay, 0, 0), Vector2.down * 0.8f, Color.red);   
+            Debug.DrawRay(transform.position + new Vector3(DownRightDetectionRay, 0, 0), Vector2.down * DownRightDetectionRayPos, Color.red);   
         }
         else if (DownrightHit.collider == null)
         {
+            if (Inveres)
+            {
+                transform.rotation = new Quaternion(0, 0, 0, 0);
+            }
+            else
+            {
+                transform.rotation = new Quaternion(0, 180, 0, 0);
+            }
+
             walkVector = -1;
-            Debug.DrawRay(transform.position + new Vector3(DownRightDetectionRay, 0, 0), Vector2.down * 0.8f, Color.green);
+            Debug.DrawRay(transform.position + new Vector3(DownRightDetectionRay, 0, 0), Vector2.down * DownRightDetectionRayPos, Color.green);
         }
 
         if (DownleftHit.collider != null)
         {
-            Debug.DrawRay(transform.position + new Vector3(DownLeftDetectionRay, 0, 0), Vector2.down * 0.8f, Color.red);
+            Debug.DrawRay(transform.position + new Vector3(DownLeftDetectionRay, 0, 0), Vector2.down * DownLeftDetectionRayPos, Color.red);
         }
         else if (DownleftHit.collider == null)
         {
+            if (Inveres)
+            {
+                transform.rotation = new Quaternion(0, 180, 0, 0);
+            }
+            else
+            {
+                transform.rotation = new Quaternion(0, 0, 0, 0);
+            }
+
             walkVector = 1;
-            Debug.DrawRay(transform.position + new Vector3(DownLeftDetectionRay, 0, 0), Vector2.down * 0.8f, Color.green);
+            Debug.DrawRay(transform.position + new Vector3(DownLeftDetectionRay, 0, 0), Vector2.down * DownLeftDetectionRayPos, Color.green);
         }
 
         RightHit = Physics2D.Raycast(transform.position + new Vector3(RightDetectionRayPos, 0, 0), Vector2.right, RightDetectionRayDistance);
@@ -91,6 +114,22 @@ public class EnemyScript : MonoBehaviour
         {
             Debug.DrawRay(transform.position + new Vector3(LeftDetectionRayPos, 0, 0), Vector2.left * LeftDetectionRayDistance, Color.green);
         }
+    }
+
+    public void Damage(int arg)
+    {
+        Health -= arg;
+
+        if(Health <= 0)
+        {
+            StartCoroutine(Death());
+        }
+    }
+
+    IEnumerator Death()
+    {
+        yield return new WaitForSeconds(1.0f);
+        Destroy(gameObject);
     }
 
     void IgnoreLayerOff()

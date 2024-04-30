@@ -14,6 +14,7 @@ public class PlayerScript : MonoBehaviour
 
     private Rigidbody2D rb;
     private RaycastHit2D hitground;
+    private RaycastHit2D hitattack;
     [SerializeField] private Animator Anim;
 
     private int health = 3;
@@ -24,6 +25,7 @@ public class PlayerScript : MonoBehaviour
 
     private bool move = true;
 
+    private bool attack_cooldown = false;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -50,6 +52,7 @@ public class PlayerScript : MonoBehaviour
                 Anim.SetFloat("RunState", 0);
             }
         }
+        Attack();
     }
 
     void Jump()
@@ -100,6 +103,58 @@ public class PlayerScript : MonoBehaviour
             Debug.DrawRay(transform.position, Vector2.down * 0.6f, Color.green);
         }
 
+    }
+
+    void Attack()
+    {
+        if (transform.rotation == new Quaternion(0, 180, 0, 0))
+        {
+            Debug.DrawRay(transform.position + new Vector3(0.7f, 1, 0), Vector2.right * 0.8f, Color.blue);
+        }
+        else
+        {
+            Debug.DrawRay(transform.position + new Vector3(-0.7f, 1, 0), Vector2.left * 0.8f, Color.blue);
+        }
+
+        if (Input.GetKey(KeyCode.W) && !attack_cooldown)
+        {
+
+            if (transform.rotation == new Quaternion(0, 180, 0, 0))
+            {
+                hitattack = Physics2D.Raycast(transform.position + new Vector3(0.7f, 1, 0), Vector2.right, 0.8f, 3);
+
+                if(hitattack.collider != null)
+                {
+                    Debug.Log(hitattack.collider.gameObject.tag);
+                    if (hitattack.collider.gameObject.tag == "Enemy")
+                    {
+                        hitattack.collider.gameObject.GetComponent<EnemyScript>().Damage(1);
+                    }
+                }
+            }
+            else
+            {
+                hitattack = Physics2D.Raycast(transform.position + new Vector3(-0.7f, 1, 0), Vector2.left, 0.8f, 3);
+
+                if (hitattack.collider != null)
+                {
+                    if (hitattack.collider.gameObject.tag == "Enemy")
+                    {
+                        hitattack.collider.gameObject.GetComponent<EnemyScript>().Damage(1);
+                    }
+                }
+            }
+            Anim.SetBool("Attack", true);
+
+            StartCoroutine(AttackColldown());
+        }
+    }
+
+    IEnumerator AttackColldown()
+    {
+        attack_cooldown = true;
+        yield return new WaitForSeconds(1);
+        attack_cooldown = false;
     }
 
     IEnumerator LockJump(float sec)

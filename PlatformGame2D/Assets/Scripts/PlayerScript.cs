@@ -15,6 +15,7 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody2D rb;
     private RaycastHit2D hitground;
     private RaycastHit2D hitattack;
+    private RaycastHit2D platform_lgnore;
     [SerializeField] private Animator Anim;
 
     private int health = 3;
@@ -51,6 +52,11 @@ public class PlayerScript : MonoBehaviour
             {
                 Anim.SetFloat("RunState", 0);
             }
+
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                StartCoroutine(PlatformIgnore());
+            }
         }
         Attack();
     }
@@ -64,7 +70,7 @@ public class PlayerScript : MonoBehaviour
 
                 if (jump)
                 {
-                    Anim.SetBool("Jump", true);
+                    //Anim.SetBool("Jump", true);
                     jump = false;
                 }
                 else if (double_jump)
@@ -109,11 +115,11 @@ public class PlayerScript : MonoBehaviour
     {
         if (transform.rotation == new Quaternion(0, 180, 0, 0))
         {
-            Debug.DrawRay(transform.position + new Vector3(0.7f, 1, 0), Vector2.right * 0.8f, Color.blue);
+            Debug.DrawRay(transform.position + new Vector3(0.7f, 1, 0), Vector2.right * 1f, Color.blue);
         }
         else
         {
-            Debug.DrawRay(transform.position + new Vector3(-0.7f, 1, 0), Vector2.left * 0.8f, Color.blue);
+            Debug.DrawRay(transform.position + new Vector3(-0.7f, 1, 0), Vector2.left * 1f, Color.blue);
         }
 
         if (Input.GetKey(KeyCode.W) && !attack_cooldown)
@@ -121,9 +127,10 @@ public class PlayerScript : MonoBehaviour
 
             if (transform.rotation == new Quaternion(0, 180, 0, 0))
             {
-                hitattack = Physics2D.Raycast(transform.position + new Vector3(0.7f, 1, 0), Vector2.right, 0.8f, 3);
+                hitattack = Physics2D.Raycast(transform.position + new Vector3(0.7f, 1, 0), Vector2.right, 1f);
+                Debug.Log(hitattack.collider);
 
-                if(hitattack.collider != null)
+                if (hitattack.collider != null)
                 {
                     Debug.Log(hitattack.collider.gameObject.tag);
                     if (hitattack.collider.gameObject.tag == "Enemy")
@@ -134,7 +141,7 @@ public class PlayerScript : MonoBehaviour
             }
             else
             {
-                hitattack = Physics2D.Raycast(transform.position + new Vector3(-0.7f, 1, 0), Vector2.left, 0.8f, 3);
+                hitattack = Physics2D.Raycast(transform.position + new Vector3(-0.7f, 1, 0), Vector2.left, 1f);
 
                 if (hitattack.collider != null)
                 {
@@ -147,6 +154,30 @@ public class PlayerScript : MonoBehaviour
             Anim.SetBool("Attack", true);
 
             StartCoroutine(AttackColldown());
+        }
+    }
+
+    IEnumerator PlatformIgnore()
+    {
+        platform_lgnore = Physics2D.Raycast(transform.position, Vector2.down, 0.6f);
+        bool ignore = false;
+
+        if (platform_lgnore.collider != null)
+        {
+            if (platform_lgnore.collider.gameObject.tag == "Platform")
+            {
+                Debug.Log("q");
+                Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), platform_lgnore.collider.GetComponent<Collider2D>(), true);
+                ignore = true;
+            }
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        if (ignore)
+        {
+            Debug.Log(platform_lgnore.collider.gameObject.tag);
+            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), platform_lgnore.collider.GetComponent<Collider2D>(), false);
         }
     }
 
@@ -232,7 +263,7 @@ public class PlayerScript : MonoBehaviour
                 lock_jump = true;
                 jump = true;
                 double_jump = true;
-                Anim.SetBool("Grounded", true);
+                //Anim.SetBool("Grounded", true);
             }
         }
     }
@@ -244,7 +275,7 @@ public class PlayerScript : MonoBehaviour
 
     void IgnoreLayerOff()
     {
-        Physics2D.IgnoreLayerCollision(3, 3, false);
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Player"), false);
     }
 
 }

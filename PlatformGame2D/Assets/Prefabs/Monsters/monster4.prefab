@@ -148,16 +148,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba5e7887a7569724880f6d7da878a74e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 1
+  anim: {fileID: 3204646702225597079}
+  Health: 2
   Speed: 1
-  DownRightDetectionRay: 0.85
-  DownLeftDetectionRay: -0.85
-  DownRightDetectionRayPos: 2
-  DownLeftDetectionRayPos: 2
-  RightDetectionRayPos: 0.8
-  RightDetectionRayDistance: 0.2
-  LeftDetectionRayPos: -0.8
-  LeftDetectionRayDistance: 0.2
+  Down_R_DetectionRay: 1.8
+  Down_L_DetectionRay: 1.8
+  Down_R_DetectionRayPos: 0.85
+  Down_L_DetectionRayPos: -0.85
+  R_DetectionRayPos: 0.85
+  R_DetectionRayDistance: 0.4
+  L_DetectionRayPos: -0.85
+  L_DetectionRayDistance: 0.4
+  R_Attack_RayDistance: 1
+  R_Attack_RayDistancePos: 0.85
+  L_Attack_RayDistance: 1
+  L_Attack_RayDistancePos: -0.85
   Move: 1
   Inveres: 1
 --- !u!68 &3399213495789587876

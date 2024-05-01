@@ -4787,7 +4787,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -4808,7 +4808,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -4829,7 +4829,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -4850,7 +4850,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -4858,6 +4858,90 @@ TextureImporter:
       bones: []
       spriteID: 56a2db6d727335947ad246ff39c57813
       internalID: -1057084602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlev_build_226
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 992
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc792933200ef9a4e82e9165bff33e17
+      internalID: 712710739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlev_build_227
+      rect:
+        serializedVersion: 2
+        x: 815
+        y: 992
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14620c30c81c4ab4587935bf9aa0c581
+      internalID: 470597889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlev_build_228
+      rect:
+        serializedVersion: 2
+        x: 879
+        y: 992
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 211971d82315aab4582f877d9bd5b60d
+      internalID: 399950688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlev_build_229
+      rect:
+        serializedVersion: 2
+        x: 799
+        y: 992
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49d4c5ae460f5cd45ac30d934d147fa0
+      internalID: -501773483
       vertices: []
       indices: 
       edges: []
@@ -4882,6 +4966,7 @@ TextureImporter:
       mainlev_build_188: -1318520074
       mainlev_build_189: 1821774551
       mainlev_build_110: -990523545
+      mainlev_build_228: 399950688
       mainlev_build_7: -1364989977
       mainlev_build_194: 856152155
       mainlev_build_115: -1103279607
@@ -4894,6 +4979,7 @@ TextureImporter:
       mainlev_build_53: 310189186
       mainlev_build_29: -746184475
       mainlev_build_49: 442743066
+      mainlev_build_229: -501773483
       mainlev_build_14: 1285213604
       mainlev_build_221: 1479919545
       mainlev_build_152: -810833347
@@ -4916,6 +5002,7 @@ TextureImporter:
       mainlev_build_175: -1361687570
       mainlev_build_3: -1413282527
       mainlev_build_1: 439290977
+      mainlev_build_227: 470597889
       mainlev_build_177: -683080199
       mainlev_build_193: -647319804
       mainlev_build_183: 47392879
@@ -4973,6 +5060,7 @@ TextureImporter:
       mainlev_build_28: -1248975638
       mainlev_build_119: 727955479
       mainlev_build_121: -509704650
+      mainlev_build_226: 712710739
       mainlev_build_11: 281676050
       mainlev_build_47: 819844725
       mainlev_build_75: -1897789152

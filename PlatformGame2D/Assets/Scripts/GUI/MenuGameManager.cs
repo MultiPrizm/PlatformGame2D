@@ -15,6 +15,13 @@ public class MenuGameManager : MonoBehaviour
     //Dead Menu
     [SerializeField] private GameObject LoseMenu;
     private bool LoseSetter = false;
+
+    //[Header("Player")]
+    private GameObject Player;
+    private void Start()
+    {
+        Player = GameObject.FindGameObjectWithTag("Player");
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
@@ -22,6 +29,13 @@ public class MenuGameManager : MonoBehaviour
             ShowWinMenu();
         }
         if (Input.GetKeyDown(KeyCode.G))
+        {
+            ShowLoseMenu();
+        }
+    }
+    private void LateUpdate()
+    {
+        if (Player.GetComponent<PlayerScript>().IsLivePlayer() == false)
         {
             ShowLoseMenu();
         }
@@ -42,7 +56,6 @@ public class MenuGameManager : MonoBehaviour
     }
     private void ShowLoseMenu()
     {
-        LoseSetter = !LoseSetter;
-        LoseMenu.SetActive(LoseSetter);
+        LoseMenu.SetActive(true);
     }
 }

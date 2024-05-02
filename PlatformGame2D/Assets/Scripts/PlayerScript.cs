@@ -27,6 +27,10 @@ public class PlayerScript : MonoBehaviour
     private bool move = true;
 
     private bool attack_cooldown = false;
+
+    private bool ignore_collision_cooldown = false;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -159,25 +163,29 @@ public class PlayerScript : MonoBehaviour
 
     IEnumerator PlatformIgnore()
     {
-        platform_lgnore = Physics2D.Raycast(transform.position, Vector2.down, 0.6f);
-        bool ignore = false;
+        if (!ignore_collision_cooldown) {
+            ignore_collision_cooldown = true;
 
-        if (platform_lgnore.collider != null)
-        {
-            if (platform_lgnore.collider.gameObject.tag == "Platform")
+            platform_lgnore = Physics2D.Raycast(transform.position, Vector2.down, 0.6f);
+            bool ignore = false;
+
+            if (platform_lgnore.collider != null)
             {
-                Debug.Log("q");
-                Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), platform_lgnore.collider.GetComponent<Collider2D>(), true);
-                ignore = true;
+                if (platform_lgnore.collider.gameObject.tag == "Platform")
+                {
+                    Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), platform_lgnore.collider.GetComponent<Collider2D>(), true);
+                    ignore = true;
+                }
             }
-        }
 
-        yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
 
-        if (ignore)
-        {
-            Debug.Log(platform_lgnore.collider.gameObject.tag);
-            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), platform_lgnore.collider.GetComponent<Collider2D>(), false);
+            if (ignore)
+            {
+                Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), platform_lgnore.collider.GetComponent<Collider2D>(), false);
+            }
+
+            ignore_collision_cooldown = false;
         }
     }
 
@@ -265,6 +273,16 @@ public class PlayerScript : MonoBehaviour
                 double_jump = true;
                 //Anim.SetBool("Grounded", true);
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "star")
+        {
+            Debug.Log("Player: Star!!!");
+            collision.gameObject.GetComponent<StarScript>().GetStar();
+            stars += 1;
         }
     }
 

@@ -11,7 +11,8 @@ public class MenuGameManager : MonoBehaviour
     private bool WinSetter = false;
     [SerializeField] private GameObject[] Stars;
     [SerializeField] private GameObject[] FXStars;
-    [SerializeField] private int BlackStarsStars = 2;
+    private int BlackStarsStars = 3;
+    
     //Dead Menu
     [SerializeField] private GameObject LoseMenu;
     private bool LoseSetter = false;
@@ -20,14 +21,12 @@ public class MenuGameManager : MonoBehaviour
     private GameObject Player;
     private void Start()
     {
+
         Player = GameObject.FindGameObjectWithTag("Player");
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            ShowWinMenu();
-        }
+        ShowWinMenu();
         if (Input.GetKeyDown(KeyCode.G))
         {
             ShowLoseMenu();
@@ -47,12 +46,17 @@ public class MenuGameManager : MonoBehaviour
     }
     private void ShowWinMenu()
     {
-        for (int i = 0; i < BlackStarsStars; i++)
+
+        for (int i = 0; i < Player.GetComponent<PlayerScript>().GetStars(); i++)
         {
-            Stars[i].GetComponent<Image>().color = Color.black;
+            Stars[i].GetComponent<Image>().color = new Color(255,255,255);
         }
-        WinSetter = !WinSetter;
-        WinMenu.SetActive(WinSetter);
+        for (int i = 0; i < Player.GetComponent<PlayerScript>().GetStars(); i++)
+        {
+            FXStars[i].SetActive(true);
+        }
+        //WinSetter = !WinSetter;
+        //WinMenu.SetActive(WinSetter);
     }
     private void ShowLoseMenu()
     {

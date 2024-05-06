@@ -57,8 +57,14 @@ public class EnemyScript : MonoBehaviour
         Radar();
         if (Move)
         {
+            anim.SetBool("HasTarget", true);
+            
             WalkControl();
             rb.velocity = new Vector2(walkVector * Speed, rb.velocity.y);
+        }
+        else
+        {
+            anim.SetBool("HasTarget", false);
         }
     }
 

@@ -99,7 +99,7 @@ public class PlayerScript : MonoBehaviour
         }
 
         //рейкаст який чекає землю(по приколу)
-        hitground = Physics2D.Raycast(transform.position, Vector2.down, 0.6f, 3);
+        hitground = Physics2D.Raycast(transform.position, Vector2.down, 0.6f);
 
         if (hitground.collider != null)
         {
@@ -132,14 +132,16 @@ public class PlayerScript : MonoBehaviour
             if (transform.rotation == new Quaternion(0, 180, 0, 0))
             {
                 hitattack = Physics2D.Raycast(transform.position + new Vector3(0.7f, 1, 0), Vector2.right, 1f);
-                Debug.Log(hitattack.collider);
 
                 if (hitattack.collider != null)
                 {
-                    Debug.Log(hitattack.collider.gameObject.tag);
                     if (hitattack.collider.gameObject.tag == "Enemy")
                     {
                         hitattack.collider.gameObject.GetComponent<EnemyScript>().Damage(1);
+                    }
+                    else if (hitattack.collider.gameObject.tag == "boss")
+                    {
+                        hitattack.collider.gameObject.GetComponent<BossScript>().Damage(1);
                     }
                 }
             }
@@ -152,6 +154,10 @@ public class PlayerScript : MonoBehaviour
                     if (hitattack.collider.gameObject.tag == "Enemy")
                     {
                         hitattack.collider.gameObject.GetComponent<EnemyScript>().Damage(1);
+                    }
+                    else if (hitattack.collider.gameObject.tag == "boss")
+                    {
+                        hitattack.collider.gameObject.GetComponent<BossScript>().Damage(1);
                     }
                 }
             }
@@ -259,10 +265,10 @@ public class PlayerScript : MonoBehaviour
         is_live = false;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         //рейкаст який чекає землю
-        hitground = Physics2D.Raycast(transform.position, Vector2.down, 0.6f, 3);
+        hitground = Physics2D.Raycast(transform.position, Vector2.down, 0.6f);
 
         if (hitground.collider != null && !lock_jump)
         {
@@ -289,11 +295,6 @@ public class PlayerScript : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         //isgrounded = false;
-    }
-
-    void IgnoreLayerOff()
-    {
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Player"), false);
     }
 
 }

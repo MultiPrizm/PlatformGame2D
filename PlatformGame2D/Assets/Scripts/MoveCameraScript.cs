@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveCameraScript : MonoBehaviour
 {
 
-    [SerializeField] private Transform target; // Целевой объект, за которым будет следовать камера
+    public Transform target; // Целевой объект, за которым будет следовать камера
     [SerializeField] private float smoothSpeed = 0.125f; // Скорость перемещения камеры
     void Start()
     {

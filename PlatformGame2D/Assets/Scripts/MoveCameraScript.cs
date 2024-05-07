@@ -6,7 +6,7 @@ public class MoveCameraScript : MonoBehaviour
 {
 
     public Transform target; // Целевой объект, за которым будет следовать камера
-    [SerializeField] private float smoothSpeed = 0.125f; // Скорость перемещения камеры
+    public float smoothSpeed = 0.125f; // Скорость перемещения камеры
     void Start()
     {
         

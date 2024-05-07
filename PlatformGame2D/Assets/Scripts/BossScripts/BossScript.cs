@@ -63,6 +63,7 @@ public class BossScript : MonoBehaviour
 
         rolling = true;
         sheald = true;
+        rb.isKinematic = false;
     }
 
     public void StopRollAttack()
@@ -75,6 +76,8 @@ public class BossScript : MonoBehaviour
 
         roll_time = roll_count;
         sheald = false;
+        rb.isKinematic = true;
+        rb.velocity = new Vector2(0, 0);
     }
 
     IEnumerator TCooldown()
@@ -156,9 +159,14 @@ public class BossScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Player" && rolling)
         {
             collision.gameObject.GetComponent<PlayerScript>().Damage(3);
+
+            rolling = false;
+
+            rb.isKinematic = true;
+            rb.velocity = new Vector2(0, 0);
         }
     }
 }

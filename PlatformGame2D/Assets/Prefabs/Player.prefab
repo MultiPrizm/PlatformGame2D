@@ -493,7 +493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerSpeed: 8
-  PlayerJump: 11.1
+  PlayerJump: 11.5
   PowerGravityScale: 10
   DefalteGravityScale: 5
   Anim: {fileID: 0}

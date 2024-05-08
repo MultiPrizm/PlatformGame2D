@@ -248,6 +248,11 @@ public class PlayerScript : MonoBehaviour
         return stars;
     }
 
+    public int GetHealth()
+    {
+        return health;
+    }
+
     IEnumerator SetSheald(float sec)
     {
         is_sheald = true;

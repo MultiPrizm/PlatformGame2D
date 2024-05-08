@@ -19,9 +19,14 @@ public class MenuGameManager : MonoBehaviour
 
     //[Header("Player")]
     private GameObject Player;
+    [Header("Set level boss or defoult")]
+    [SerializeField] private bool BossLevel = false;
+
+    [Header("Hearts panel")]
+    [SerializeField] private GameObject[] HeartIcons;
+    private int HeartsCount = 1;
     private void Start()
     {
-
         Player = GameObject.FindGameObjectWithTag("Player");
     }
     private void Update()
@@ -30,6 +35,19 @@ public class MenuGameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G))
         {
             ShowLoseMenu();
+        }
+        for(int i = 0; i<HeartIcons.Length; i++)
+        {
+            if(i < HeartsCount)
+            {
+                HeartIcons[i].GetComponent<Image>().color = new Color(255, 255, 255);
+                //HeartIcons[i].SetActive(true);
+            }
+            else
+            {
+                HeartIcons[i].GetComponent<Image>().color = new Color(0, 0, 0);
+                //HeartIcons[i].SetActive(false);
+            }
         }
     }
     private void LateUpdate()
@@ -46,14 +64,26 @@ public class MenuGameManager : MonoBehaviour
     }
     private void ShowWinMenu()
     {
-
-        for (int i = 0; i < Player.GetComponent<PlayerScript>().GetStars(); i++)
-        {
-            Stars[i].GetComponent<Image>().color = new Color(255,255,255);
+        if(BossLevel == false) { 
+            for (int i = 0; i < Player.GetComponent<PlayerScript>().GetStars(); i++)
+            {
+                Stars[i].GetComponent<Image>().color = new Color(255,255,255);
+            }
+            for (int i = 0; i < Player.GetComponent<PlayerScript>().GetStars(); i++)
+            {
+                FXStars[i].SetActive(true);
+            }
         }
-        for (int i = 0; i < Player.GetComponent<PlayerScript>().GetStars(); i++)
+        if (BossLevel == true)
         {
-            FXStars[i].SetActive(true);
+            for (int i = 0; i < 3; i++)
+            {
+                Stars[i].GetComponent<Image>().color = new Color(255, 255, 255);
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                FXStars[i].SetActive(true);
+            }
         }
         //WinSetter = !WinSetter;
         //WinMenu.SetActive(WinSetter);

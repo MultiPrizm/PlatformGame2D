@@ -18311,7 +18311,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1081980739
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21110,7 +21110,7 @@ MonoBehaviour:
   - {fileID: 150301480}
   - {fileID: 2095047888}
   - {fileID: 226274390}
-  maxLevelsCount: 6
+  maxLevelsCount: 4
 --- !u!114 &1481375049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24653,7 +24653,7 @@ RectTransform:
   m_Father: {fileID: 1993287790}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.75, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -611.47, y: 39.75}
   m_SizeDelta: {x: -1228.93, y: 61.5}
   m_Pivot: {x: 0.5, y: 0.5}

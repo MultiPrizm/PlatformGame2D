@@ -9,7 +9,7 @@ public class MenuGameManager : MonoBehaviour
     //Win Menu
     [SerializeField] private GameObject WinMenu;
     private bool WinSetter = false;
-    [SerializeField] private GameObject[] Stars;
+    [SerializeField] private Image[] Stars;
     [SerializeField] private GameObject[] FXStars;
     private int BlackStarsStars = 3;
     
@@ -19,18 +19,22 @@ public class MenuGameManager : MonoBehaviour
 
     //[Header("Player")]
     private GameObject Player;
+    private PlayerScript _PlayerScript;
     [Header("Set level boss or defoult")]
     [SerializeField] private bool BossLevel = false;
 
     [Header("Hearts panel")]
-    [SerializeField] private GameObject[] HeartIcons;
+    [SerializeField] private Image[] HeartIcons;
+
     private int HeartsCount = 1;
     private void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
+        _PlayerScript = Player.GetComponent<PlayerScript>();
     }
     private void Update()
     {
+        
         ShowWinMenu();
         if (Input.GetKeyDown(KeyCode.G))
         {
@@ -38,14 +42,14 @@ public class MenuGameManager : MonoBehaviour
         }
         for(int i = 0; i<HeartIcons.Length; i++)
         {
-            if(i < HeartsCount)
+            if(i < _PlayerScript.GetHealth())
             {
-                HeartIcons[i].GetComponent<Image>().color = new Color(255, 255, 255);
+                HeartIcons[i].color = new Color(255, 255, 255);
                 //HeartIcons[i].SetActive(true);
             }
             else
             {
-                HeartIcons[i].GetComponent<Image>().color = new Color(0, 0, 0);
+                HeartIcons[i].color = new Color(0, 0, 0);
                 //HeartIcons[i].SetActive(false);
             }
         }
@@ -65,11 +69,11 @@ public class MenuGameManager : MonoBehaviour
     private void ShowWinMenu()
     {
         if(BossLevel == false) { 
-            for (int i = 0; i < Player.GetComponent<PlayerScript>().GetStars(); i++)
+            for (int i = 0; i < _PlayerScript.GetStars(); i++)
             {
-                Stars[i].GetComponent<Image>().color = new Color(255,255,255);
+                Stars[i].color = new Color(255,255,255);
             }
-            for (int i = 0; i < Player.GetComponent<PlayerScript>().GetStars(); i++)
+            for (int i = 0; i < _PlayerScript.GetStars(); i++)
             {
                 FXStars[i].SetActive(true);
             }
@@ -78,7 +82,7 @@ public class MenuGameManager : MonoBehaviour
         {
             for (int i = 0; i < 3; i++)
             {
-                Stars[i].GetComponent<Image>().color = new Color(255, 255, 255);
+                Stars[i].color = new Color(255, 255, 255);
             }
             for (int i = 0; i < 3; i++)
             {

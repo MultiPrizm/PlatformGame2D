@@ -65,6 +65,8 @@ public class MenuGameManager : MonoBehaviour
     {
         PauseSetter = !PauseSetter;
         PauseMenu.SetActive(PauseSetter);
+        if (PauseSetter == true) Time.timeScale = 0;
+        if (PauseSetter == false) Time.timeScale = 1;
     }
     private void ShowWinMenu()
     {
@@ -88,12 +90,15 @@ public class MenuGameManager : MonoBehaviour
             {
                 FXStars[i].SetActive(true);
             }
+            
         }
+        
         //WinSetter = !WinSetter;
         //WinMenu.SetActive(WinSetter);
     }
     private void ShowLoseMenu()
     {
         LoseMenu.SetActive(true);
+        Time.timeScale = 0;
     }
 }

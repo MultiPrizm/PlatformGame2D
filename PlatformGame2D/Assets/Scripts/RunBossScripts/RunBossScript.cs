@@ -12,14 +12,24 @@ public class RunBossScript : MonoBehaviour
     private bool speed_up_level1 = false;
     private bool speed_up_level2 = false;
     private bool speed_up_level3 = false;
+
+    private bool move = true;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        StartCoroutine(SpeedUp());
     }
 
     void Update()
     {
-        rb.velocity = new Vector2(speed, 0);
+        if (move)
+        {
+            rb.velocity = new Vector2(speed, 0);
+        }
+        else
+        {
+            rb.velocity = new Vector2(0, 0);
+        }
 
         SetDanger();
     }
@@ -61,5 +71,25 @@ public class RunBossScript : MonoBehaviour
             speed_up_level3 = false;
         }
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<PlayerScript>().Damage(3);
+            move = false;
+        }
+
+        if (collision.gameObject.tag == "Enemy")
+        {
+            collision.gameObject.GetComponent<EnemyScript>().Damage(10);
+        }
+    }
+
+    private IEnumerator SpeedUp()
+    {
+        yield return new WaitForSeconds(8f);
+        speed += 3;
     }
 }

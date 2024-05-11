@@ -27,8 +27,10 @@ public class MenuGameManager : MonoBehaviour
     [SerializeField] private Image[] HeartIcons;
 
     private int HeartsCount = 1;
+
     private void Start()
     {
+        Time.timeScale = 1;
         Player = GameObject.FindGameObjectWithTag("Player");
         _PlayerScript = Player.GetComponent<PlayerScript>();
     }
@@ -65,8 +67,8 @@ public class MenuGameManager : MonoBehaviour
     {
         PauseSetter = !PauseSetter;
         PauseMenu.SetActive(PauseSetter);
-        if (PauseSetter == true) Time.timeScale = 0;
-        if (PauseSetter == false) Time.timeScale = 1;
+        //if (PauseSetter == true) Time.timeScale = 0;
+        //if (PauseSetter == false) Time.timeScale = 1;
     }
     private void ShowWinMenu()
     {
@@ -99,6 +101,6 @@ public class MenuGameManager : MonoBehaviour
     private void ShowLoseMenu()
     {
         LoseMenu.SetActive(true);
-        Time.timeScale = 0;
+        
     }
 }

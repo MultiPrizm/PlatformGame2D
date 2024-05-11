@@ -89,7 +89,7 @@ public class RunBossScript : MonoBehaviour
 
     private IEnumerator SpeedUp()
     {
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(10f);
         speed += 3;
     }
 }

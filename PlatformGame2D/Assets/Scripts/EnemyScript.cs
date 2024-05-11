@@ -118,6 +118,15 @@ public class EnemyScript : MonoBehaviour
         {
             walkVector = -1;
             Debug.DrawRay(transform.position + new Vector3(R_DetectionRayPos, 0, 0), Vector2.right * R_DetectionRayDistance, Color.red);
+
+            if (Inveres)
+            {
+                transform.rotation = new Quaternion(0, 0, 0, 0);
+            }
+            else
+            {
+                transform.rotation = new Quaternion(0, 180, 0, 0);
+            }
         }
         else if (RightHit.collider == null)
         {
@@ -128,6 +137,15 @@ public class EnemyScript : MonoBehaviour
         {
             walkVector = 1;
             Debug.DrawRay(transform.position + new Vector3(L_DetectionRayPos, 0, 0), Vector2.left * L_DetectionRayDistance, Color.red);
+
+            if (Inveres)
+            {
+                transform.rotation = new Quaternion(0, 180, 0, 0);
+            }
+            else
+            {
+                transform.rotation = new Quaternion(0, 0, 0, 0);
+            }
         }
         else if (LeftHit.collider == null)
         {

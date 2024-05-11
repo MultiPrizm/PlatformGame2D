@@ -13,7 +13,7 @@ public class Portal : MonoBehaviour
             collision.gameObject.GetComponent<PlayerScript>().Move(false);
             if(PlayerPrefs.GetInt("StarsOfLevelNumber" + SceneManager.GetActiveScene().buildIndex) < collision.gameObject.GetComponent<PlayerScript>().GetStars() && BossLevel == false)
                 PlayerPrefs.SetInt("StarsOfLevelNumber" + SceneManager.GetActiveScene().buildIndex, collision.gameObject.GetComponent<PlayerScript>().GetStars());
-            if (BossLevel == true) PlayerPrefs.SetInt("StarsOfLevelNumber" + SceneManager.GetActiveScene().buildIndex, 3); 
+            else if (BossLevel == true) PlayerPrefs.SetInt("StarsOfLevelNumber" + SceneManager.GetActiveScene().buildIndex, 3); 
         }
     }
 }

@@ -24,4 +24,8 @@ public class SceneMenegerSCR : MonoBehaviour
     {
         if (EndScreenAnimator != null) EndScreenAnimator.SetTrigger("SetEnd");
     }
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

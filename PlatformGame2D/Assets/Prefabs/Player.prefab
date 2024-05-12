@@ -389,6 +389,7 @@ GameObject:
   - component: {fileID: 1143442106040199196}
   - component: {fileID: 6691222932787324318}
   - component: {fileID: 4074418160156897919}
+  - component: {fileID: 6094014913939460264}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -427,7 +428,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.22
   m_Material: {fileID: 6200000, guid: b50b7d2b5a3bce548b525b7520d938aa, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -496,7 +497,104 @@ MonoBehaviour:
   PlayerJump: 11.5
   PowerGravityScale: 10
   DefalteGravityScale: 5
-  Anim: {fileID: 0}
+  Anim: {fileID: 3424147808738391630}
+  runClip: {fileID: 8300000, guid: c3075203d167ad74abe76b40e575f529, type: 3}
+--- !u!82 &6094014913939460264
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041669233013875987}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.345
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1085277088466530142
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,7 +890,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5291242565660012721}
-  - component: {fileID: 679069261312270140}
   m_Layer: 3
   m_Name: Root
   m_TagString: Untagged
@@ -818,95 +915,6 @@ Transform:
   - {fileID: 5641607487977767263}
   m_Father: {fileID: 1260384256496708583}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &679069261312270140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1331438548822179795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baea2e9758e554909b2367e396d9c5a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _itemList:
-  - {fileID: 0}
-  - {fileID: 6722107936854402078}
-  - {fileID: 5914539700657669310}
-  - {fileID: 7122021807296220195}
-  - {fileID: 1724127185834655142}
-  - {fileID: 8015123071073031922}
-  - {fileID: 4848271625401431011}
-  - {fileID: 1710862378460483044}
-  - {fileID: 2729105734806953454}
-  - {fileID: 1724127185834655142}
-  - {fileID: 8015123071073031922}
-  - {fileID: 371370131946434385}
-  - {fileID: 7906949343833752054}
-  - {fileID: 9066406660446497159}
-  - {fileID: 2676967434872270912}
-  - {fileID: 8675588457663286273}
-  _eyeList:
-  - {fileID: 6552826911276123460}
-  - {fileID: 2687725103946480245}
-  _hairList:
-  - {fileID: 726730598796128183}
-  - {fileID: 5914539700657669310}
-  - {fileID: 4752044277600742091}
-  - {fileID: 6722107936854402078}
-  _bodyList:
-  - {fileID: 3936835286155490202}
-  - {fileID: 3218615917897845032}
-  - {fileID: 2673222578730449915}
-  - {fileID: 8499433868410601613}
-  - {fileID: 5592789641623189943}
-  - {fileID: 1351813805970221724}
-  _clothList:
-  - {fileID: 7122021807296220195}
-  - {fileID: 8015123071073031922}
-  - {fileID: 1724127185834655142}
-  _armorList:
-  - {fileID: 2729105734806953454}
-  - {fileID: 7457751003611501383}
-  - {fileID: 5100728271645494289}
-  _pantList:
-  - {fileID: 1710862378460483044}
-  - {fileID: 4848271625401431011}
-  _weaponList:
-  - {fileID: 371370131946434385}
-  - {fileID: 7906949343833752054}
-  - {fileID: 9066406660446497159}
-  - {fileID: 2676967434872270912}
-  _backList:
-  - {fileID: 8675588457663286273}
-  _spHorseSPList: {fileID: 0}
-  _spHorseString: 
-  _bodyTexture: {fileID: 0}
-  _bodyString: 
-  _hairListString:
-  - 
-  - Assets/Resources/SPUM/SPUM_Sprites/Items/4_Helmet/Helmet_3.png
-  - 
-  - 
-  _clothListString:
-  - Assets/Resources/SPUM/SPUM_Sprites/Items/2_Cloth/Cloth_1.png
-  - Assets/Resources/SPUM/SPUM_Sprites/Items/2_Cloth/Cloth_1.png
-  - Assets/Resources/SPUM/SPUM_Sprites/Items/2_Cloth/Cloth_1.png
-  _armorListString:
-  - 
-  - 
-  - 
-  _pantListString:
-  - Assets/Resources/SPUM/SPUM_Sprites/Items/3_Pant/Foot_2.png
-  - Assets/Resources/SPUM/SPUM_Sprites/Items/3_Pant/Foot_2.png
-  _weaponListString:
-  - Assets/Resources/SPUM/SPUM_Sprites/Items/6_Weapons/Ward_1.png
-  - 
-  - 
-  - 
-  _backListString:
-  - Assets/Resources/SPUM/SPUM_Sprites/Items/7_Back/Back_1.png
 --- !u!1 &1371903926271910675
 GameObject:
   m_ObjectHideFlags: 0

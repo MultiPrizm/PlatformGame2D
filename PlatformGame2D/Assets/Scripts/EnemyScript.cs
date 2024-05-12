@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
@@ -41,8 +40,13 @@ public class EnemyScript : MonoBehaviour
     private RaycastHit2D AttackHit;
     private RaycastHit2D RadarHit;
     private bool attack_cooldown = false;
+
+    [Header("audio")]
+    [SerializeField] private AudioClip hitClip;
+    private AudioSource _audioSourse;
     void Start()
     {
+        _audioSourse = GetComponent<AudioSource>();
         int randomNumber = Random.Range(0, 2);
 
         walkVector = (randomNumber == 0) ? -1 : 1;
@@ -111,13 +115,13 @@ public class EnemyScript : MonoBehaviour
             Debug.DrawRay(transform.position + new Vector3(Down_L_DetectionRayPos, 0, 0), Vector2.down * Down_L_DetectionRay, Color.green);
         }
 
-        RightHit = Physics2D.Raycast(transform.position + new Vector3(R_DetectionRayPos, 0, 0), Vector2.right, R_DetectionRayDistance, 3);
-        LeftHit = Physics2D.Raycast(transform.position + new Vector3(L_DetectionRayPos, 0, 0), Vector2.left, L_DetectionRayDistance, 3);
+        RightHit = Physics2D.Raycast(transform.position + new Vector3(R_DetectionRayPos, -0.2f, 0), Vector2.right, R_DetectionRayDistance, 3);
+        LeftHit = Physics2D.Raycast(transform.position + new Vector3(L_DetectionRayPos, -0.2f, 0), Vector2.left, L_DetectionRayDistance, 3);
 
         if (RightHit.collider != null)
         {
             walkVector = -1;
-            Debug.DrawRay(transform.position + new Vector3(R_DetectionRayPos, 0, 0), Vector2.right * R_DetectionRayDistance, Color.red);
+            Debug.DrawRay(transform.position + new Vector3(R_DetectionRayPos, -0.2f, 0), Vector2.right * R_DetectionRayDistance, Color.red);
 
             if (Inveres)
             {
@@ -130,17 +134,17 @@ public class EnemyScript : MonoBehaviour
         }
         else if (RightHit.collider == null)
         {
-            Debug.DrawRay(transform.position + new Vector3(R_DetectionRayPos, 0, 0), Vector2.right * R_DetectionRayDistance, Color.green);
+            Debug.DrawRay(transform.position + new Vector3(R_DetectionRayPos, -0.2f, 0), Vector2.right * R_DetectionRayDistance, Color.green);
         }
 
         if (LeftHit.collider != null)
         {
             walkVector = 1;
-            Debug.DrawRay(transform.position + new Vector3(L_DetectionRayPos, 0, 0), Vector2.left * L_DetectionRayDistance, Color.red);
+            Debug.DrawRay(transform.position + new Vector3(L_DetectionRayPos, -0.2f, 0), Vector2.left * L_DetectionRayDistance, Color.red);
 
             if (Inveres)
             {
-                transform.rotation = new Quaternion(0, 180, 0, 0);
+                transform.rotation = new Quaternion(0, 180, 0, 0); // что за говно код
             }
             else
             {
@@ -149,16 +153,18 @@ public class EnemyScript : MonoBehaviour
         }
         else if (LeftHit.collider == null)
         {
-            Debug.DrawRay(transform.position + new Vector3(L_DetectionRayPos, 0, 0), Vector2.left * L_DetectionRayDistance, Color.green);
+            Debug.DrawRay(transform.position + new Vector3(L_DetectionRayPos, -0.2f, 0), Vector2.left * L_DetectionRayDistance, Color.green);
         }
     }
 
     public void Damage(int arg)
     {
+
         Health -= arg;
         anim.SetBool("hit", true);
-
-        if(Health <= 0)
+        _audioSourse.clip = hitClip;
+        _audioSourse.Play();
+        if (Health <= 0)
         {
             Move = true;
             anim.SetBool("isDead", true);

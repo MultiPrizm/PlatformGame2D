@@ -30,10 +30,17 @@ public class PlayerScript : MonoBehaviour
 
     private bool ignore_collision_cooldown = false;
 
+    private bool Grounded = true;
+    [Header("audio")]
+    [SerializeField] private AudioClip runClip;
+    private AudioSource _audioSourse;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        _audioSourse = GetComponent<AudioSource>();
+        _audioSourse.clip = runClip;
+        _audioSourse.Stop();
     }
 
     void Update()
@@ -41,20 +48,24 @@ public class PlayerScript : MonoBehaviour
         if (move) {
             Jump();
             rb.velocity = new Vector2(Input.GetAxis("Horizontal") * PlayerSpeed, rb.velocity.y);
-
+            if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D)) && Grounded == true)
+                _audioSourse.Play();
+            if((Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D)))
+                _audioSourse.Stop();
             if (Input.GetAxis("Horizontal") > 0)
-            {
+            {  
                 transform.rotation = new Quaternion(0, 180, 0, 0);
                 Anim.SetFloat("RunState", 0.5f);
             }
             if (Input.GetAxis("Horizontal") < 0)
             {
                 transform.rotation = new Quaternion(0, 0, 0, 0);
-                Anim.SetFloat("RunState", 0.5f);
+                Anim.SetFloat("RunState", 0.5f);          
             }
             if (Input.GetAxis("Horizontal") == 0)
             {
                 Anim.SetFloat("RunState", 0);
+  
             }
 
             if (Input.GetKeyDown(KeyCode.S))
@@ -126,7 +137,7 @@ public class PlayerScript : MonoBehaviour
             Debug.DrawRay(transform.position + new Vector3(-0.7f, 1, 0), Vector2.left * 1f, Color.blue);
         }
 
-        if (Input.GetKey(KeyCode.W) && !attack_cooldown)
+        if (Input.GetMouseButtonDown(0) && !attack_cooldown)
         {
 
             if (transform.rotation == new Quaternion(0, 180, 0, 0))
@@ -270,6 +281,10 @@ public class PlayerScript : MonoBehaviour
         is_live = false;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(Input.GetAxis("Horizontal") != 0) _audioSourse.Play();
+    }
     private void OnCollisionStay2D(Collision2D collision)
     {
         //рейкаст який чекає землю
@@ -279,6 +294,7 @@ public class PlayerScript : MonoBehaviour
         {
             if (hitground.collider.tag != "Player")
             {
+                Grounded = true;
                 lock_jump = true;
                 jump = true;
                 double_jump = true;
@@ -289,6 +305,7 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if (collision.gameObject.tag == "star")
         {
             Debug.Log("Player: Star!!!");
@@ -299,6 +316,8 @@ public class PlayerScript : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+        Grounded = false;
+        _audioSourse.Stop();
         //isgrounded = false;
     }
 

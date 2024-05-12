@@ -18,11 +18,12 @@ public class SceneManagerMENU : MonoBehaviour
     }
     private void Update()
     {
-        
+        /*
         if (Input.GetKeyDown(KeyCode.L))
         {
             PlayerPrefs.DeleteAll();
         }
+        */
         
     }
     private void setMenuLevel()

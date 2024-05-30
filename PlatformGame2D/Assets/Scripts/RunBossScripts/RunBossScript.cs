@@ -36,7 +36,6 @@ public class RunBossScript : MonoBehaviour
 
     private void SetDanger()
     {
-        Debug.Log(Vector3.Distance(transform.position, player.position));
 
         if (Vector3.Distance(transform.position, player.position) > 10f && !speed_up_level1)
         {

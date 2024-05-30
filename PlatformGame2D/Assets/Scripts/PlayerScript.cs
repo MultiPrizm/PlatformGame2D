@@ -65,7 +65,7 @@ public class PlayerScript : MonoBehaviour
             if (Input.GetAxis("Horizontal") == 0)
             {
                 Anim.SetFloat("RunState", 0);
-  
+                _audioSourse.Stop();
             }
 
             if (Input.GetKeyDown(KeyCode.S))
